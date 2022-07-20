@@ -1,2 +1,0 @@
-# Ariane
- Projet de stage 
