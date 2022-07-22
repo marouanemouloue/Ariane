@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- side bar main wrapper -->
+<div class="side-nav-bar"
+    [ngClass]="{ 'side-nav-bar-collapsed': !(showSideNav | async) }">
+    
+    <!-- overlay -->
+    <div class="side-nav-bar-overlay bg-lb" 
+    [ngStyle]="{ 'transition': 'background-color ' + duration + 's, visibility ' + duration + 's' }"
+    [ngClass]="{ 'side-nav-bar-overlay-collapsed': !(showSideNav | async) }"
+        (click)="onSidebarClose()"></div>
+    
+    <!-- side bar-->
+    <div class="side-nav-bar-menu-container " 
+    [ngStyle]="getSideNavBarStyle((showSideNav | async))" style="background-color: #4487CC; color: white;">
+        
+        <!-- close button -->
+        <div class="inline">
+            
+        <span class="material-icons side-nav-bar-close" (click)="onSidebarClose()" style="display: flex;">
+            <h1>Gestion Anomalie</h1>
+
+            <span class="material-symbols-outlined" style="margin-left: 10px;">
+                arrow_back
+                </span>
+
+        </span>
+        </div>
+
+        <!-- side bar content -->
+        <div class="list-sidebar " >
+           
+        
+               
+                    <a>Suivi Anomalie</a>
+                    <a>Ajouter Anomalie</a>
+                    <a>Exporter Anomalie</a>
+                    <div style="background-color:white ;height: 2px;" ></div>
+              
+           
+        </div>
+    </div>
+</div>
