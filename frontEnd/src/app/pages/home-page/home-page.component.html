@@ -4,54 +4,44 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Starter</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   Font Awesome Icons
-      <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.css"> 
+  <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.css">
   <!-- Theme style -->
- <link rel="stylesheet" href="/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/assets/css/adminlte.min.css">
 </head>
-<body >
-  <app-sidebar
-  [sidenavTemplateRef]="navContent"
-  [navWidth]="280" 
-  [duration]="0.5"></app-sidebar>
-<div >
 
- <app-navbar ></app-navbar>
-
- 
-
-
-
+<body>
+  <app-sidebar [sidenavTemplateRef]="navContent" [navWidth]="280" [duration]="0.5"></app-sidebar>
+  <div>
+    <app-navbar></app-navbar>
     <!-- Main content -->
-  
     <div class="content">
-        <h1>Bienvenue sur ARIANE</h1>
-        <h3>Outil de gestion des anomalies de production à affecter aux opérateurs</h3>
+      <h1>Bienvenue sur ARIANE</h1>
+      <h3>Outil de gestion des anomalies de production à affecter aux opérateurs</h3>
     </div>
-  <!-- /.content-wrapper -->
-
-  <ng-template #navContent>
-    Side Nav Bar Content Here
-  </ng-template>
-  <!-- Main Footer -->
- <app-footer></app-footer>
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+    <!-- /.content-wrapper -->
+    <ng-template #navContent>
+      Side Nav Bar Content Here
+    </ng-template>
+    <!-- Main Footer -->
+    <app-footer></app-footer>
+  </div>
+  <!-- ./wrapper -->
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
