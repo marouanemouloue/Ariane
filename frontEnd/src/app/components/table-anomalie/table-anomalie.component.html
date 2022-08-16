@@ -1,0 +1,287 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+<body>
+  <!-- Filtre component -->
+  <div style="margin:25px; border:1px solid;">
+    <div class="filtreHeader bg-lb" style="height: 50px;">
+      <h3> Filtre de recherche :</h3>
+      <form id="searchBar">
+        <input type="text" matInput class="search-txt-input"
+          (keyup)="applyFilter($event)" placeholder="Chercher ..." #input>
+        <button type="submit"
+          class="search-button">
+          <i style="margin-top: 5px;" class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+    <div class="inputsContent">
+    <div class="filtreContent">
+      <div class="filtreListe">
+        <label for="op-select">Opérateurs:</label>
+        <select [(ngModel)]="operateurs" (change)="onChangeOp($event);" name="operateurs" id="op-select">
+          <option value="">--</option>
+          <option  *ngFor="let op of dataSourceOperateurs"  value="{{op.nom}}">{{op.nom}}</option>
+        </select>
+      </div>
+      <div class="filtreListe">
+        <label for="flux-select">Flux:</label>
+        <select [(ngModel)]="flux" (change)="onChangeFlux($event)" name="flux" id="flux-select">
+          <option value="">--</option>
+
+          <option  *ngFor="let flux of dataSourceFlux"  value="{{flux.nom}}">{{flux.nom}}</option>
+     
+        </select>
+      </div>
+      <div class="filtreListe">
+        <label  for="act-select">Activité:</label>
+        <select  name="activite" id="act-select">
+          <option >--</option>
+          <option *ngFor="let act of dataSourceActivites"  value="{{act.name}}">{{act.name}}</option>
+          
+        </select>
+      </div>
+      <div class="filtreListe">
+        <label for="stat-select">Statut:</label>
+        <select name="statut" id="statut-select">
+          <option value="">--</option>
+          <option *ngFor="let anoStat of dataSourceStatus" value='{{anoStat.statut}}'>
+            {{anoStat.statut}}
+          </option>       
+        </select>
+      </div>
+      <div class="filtreListe">
+        <label for="from-date">Start date:</label>
+
+        <input type="date" id="from-date" name="aPartirAnomalie">
+      </div>
+      <div class="filtreListe">
+        <label for="to-date">Start date:</label>
+
+        <input type="date" id="to-date" name="jusquaAnomalie">
+      </div>
+    </div>
+      <button  mat-flat-button style="background-color: red;" (click)="resetFilters()">Reset</button>
+
+    </div>
+  </div>
+  <!-- Tableau anomalie-->
+  <div style="margin: 20px;">
+    <span>Liste Anomalie</span>
+    <table mat-table [dataSource]="dataSource" matSort
+      (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+      <form #AnoForm="ngForm" (submit)="OnSubmit(id,AnoForm);">
+        <!-- ID Column -->
+        <ng-container class="tabHead" matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+            sortActionDescription="Sort by number"> Id anomalie <div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+        </ng-container>
+        <!-- Nom Op Column -->
+        <ng-container matColumnDef="nomOperateur">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+            sortActionDescription="Sort by nom"> Nom Operateur <div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+              <input matInput name="nomOperateur" ngModel='{{element.nomOperateur}}'>
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.nomOperateur}}
+            </div>
+          </td>
+
+        </ng-container>
+        <!-- Prenom Column -->
+        <ng-container matColumnDef="prenomOperateur">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+            sortActionDescription="Sort by Prenom"> Prenom Operateur<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+              <input  name="prenomOperateur" ngModel="{{element.prenomOperateur}}"
+                >
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.prenomOperateur}}
+            </div>
+          </td>
+        </ng-container>
+        <!-- uA Column -->
+        <ng-container matColumnDef="nomUA">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Ua <div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+              <input matInput name="nomUA" ngModel='{{element.nomUA}}'>
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.nomUA}}
+            </div>
+          </td>
+        </ng-container>
+        <!-- Flux Column -->
+        <ng-container matColumnDef="flux">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Flux <div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+           
+              {{element.flux}}
+          </td>
+        </ng-container>
+        <!-- Activite Column -->
+        <ng-container matColumnDef="activite">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Activite<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.activite}} </td>
+        </ng-container>
+        <!-- ANOMALIE tYPE Column -->
+        <ng-container matColumnDef="typeAnomalie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> TypeAnomalie<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+              <select matInput name="typeAnomalie" ngModel="{{element.typeAnomalie}}">
+                <optgroup *ngFor="let act of dataSourceActivites" label="{{act.name}}">
+                  <ng-container *ngFor="let anoType of dataSourceTypes">
+                  <option *ngIf=' act.name == anoType.activite.name ' value='{{anoType.anoTypeNom}}'>
+                    {{anoType.anoTypeNom}}
+                  </option>
+                </ng-container>
+                </optgroup>      
+              </select>
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.typeAnomalie}}
+            </div>
+          </td>
+        </ng-container>
+        <!-- Statut Column -->
+        <ng-container matColumnDef="anomalieStatut">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Anomalie Statut<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+
+              <select name="anomalieStatut" ngModel="{{element.anomalieStatut}}">
+                <option *ngFor="let anoStat of dataSourceStatus" value='{{anoStat.statut}}'>
+                  {{anoStat.statut}}
+                </option>
+              </select>
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.anomalieStatut}}
+            </div>
+          </td>
+        </ng-container>
+        <!-- Date Column -->
+        <ng-container matColumnDef="dateAnomalie">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Anomalie<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.isEdit">
+
+              <input type="date" ngModel="{{element.dateAnomalie | date:'yyyy-MM-dd'}}"  (ngModelChange)="element.dateAnomalie=$event" name="dateAnomalie">
+
+            </div>
+            <div *ngIf="!element.isEdit">
+              {{element.dateAnomalie | date
+                :'dd-MM-yyyy ' }} 
+            </div>
+            </td>
+        </ng-container>
+        <!-- Points Column -->
+        <ng-container matColumnDef="nbrPoints">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> nPointsRetires<div
+              style="display: flex;flex-direction:column;"><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;">keyboard_arrow_up</span><span
+                class="material-icons" style="font-size:
+                20px;margin-left:3px;padding: -5px;margin-top:-12px ;">keyboard_arrow_down</span></div>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.nbrPoints}} </td>
+        </ng-container>
+        <!-- buton Column -->
+        <ng-container matColumnDef=" ">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              <div class="flex" *ngIf="!element.isEdit">
+                <button (click)="modifier(element)" class="edit-btn"
+                  style="background-color: #017BFE;">
+                  <span class="material-icons">edit</span> Modifer</button>
+                <button (click)="supprimer(element.id,element)"
+                  class="supp-btn">
+                  <span class="material-icons">close</span> Supprimer</button>
+              </div>
+              <div class="flex" *ngIf="element.isEdit">
+
+                <button type="submit" (click)="OnSubmit(element.id,AnoForm);element.isEdit=false;getId(element.id)" class="edit-btn" style="background-color:
+                  #017BFE;">
+                  <span class="material-icons">check</span> Valider</button>
+                <button (click)="element.isEdit= false" class="supp-btn">
+                  <span class="material-icons">close</span> Annuler</button>
+              </div>
+
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </form>
+
+    </table>
+
+    <mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent= $event"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+</body>

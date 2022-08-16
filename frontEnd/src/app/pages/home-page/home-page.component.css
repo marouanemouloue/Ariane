@@ -1,0 +1,31 @@
+.content{
+
+    margin: 0;
+    position: absolute;
+    top: 70%;
+    left: 35%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+  
+.content h1{
+    font-family:Georgia, 'Times New Roman', Times, serif ;
+    font-size: 50px;
+}
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+}
+@media only screen and (max-width: 800px){
+	/*Big smartphones [426px -> 600px]*/
+    .content{
+        left: 40%;
+    }
+    .content h1{
+        font-family:Georgia, 'Times New Roman', Times, serif ;
+        font-size: 30px;
+    }
+}
+@media only screen and (max-width:605px){
+	/*Small smartphones [325px -> 425px]*/
+   .content{ left: 45%;}
+}

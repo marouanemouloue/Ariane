@@ -1,0 +1,57 @@
+<div style="margin:25px; border:1px solid">
+    <div class="filtreHeader bg-lb" style="height: 50px;">
+        <h3 >   Filtre de recherche :</h3>
+        <form id="searchBar">
+            <input type="text" class="search-txt-input"
+                 [(ngModel)]="searchB">
+            <button type="submit" (click)="search(searchB)"
+                class="search-button">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+    <div class="filtreContent">
+        <div class="filtreListe">
+            <label for="op-select">Opérateurs:</label>
+            <select name="operateurs" id="op-select">
+                <option value="">--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
+        <div class="filtreListe">
+            <label for="flux-select">Flux:</label>
+            <select name="flux" id="flux-select">
+                <option value="">--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
+        <div class="filtreListe">
+            <label for="act-select">Activité:</label>
+            <select name="activite" id="act-select">
+                <option value="">--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
+        <div class="filtreListe">
+            <label for="stat-select">Statut:</label>
+            <select name="statut" id="statut-select">
+                <option value="">--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+            </select>
+        </div>
+        <div class="filtreListe">
+            <label for="from-date">Start date:</label>
+
+            <input type="date" id="from-date" name="aPartirAnomalie">
+        </div>
+        <div class="filtreListe">
+            <label for="to-date">Start date:</label>
+
+            <input type="date" id="to-date" name="jusquaAnomalie">
+        </div>
+    </div>
+</div>

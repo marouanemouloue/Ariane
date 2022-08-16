@@ -1,0 +1,115 @@
+
+
+
+
+    <app-sidebar [navWidth]="280" [duration]="0.5"></app-sidebar>
+    <div>
+        <app-navbar></app-navbar>
+        <!-- Main content -->
+        <div class="content">
+            <h3 style="font-weight:10 ;">Enregistrement d'une anomalie de production</h3>
+            <div class="separateur"></div>
+            <form id="ajouter">
+                <div class="flex">
+
+
+                    <div class="input-box" style="margin-right: 5%;">
+                        <h3>Opérateurs:</h3>
+                        <select ngModel="op" class="txt-input" name="operateurs">
+                            <option *ngFor="let op of dataSourceOperateurs"
+                                value="{{op.nom}}">{{op.nom}}</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <h3>Date de l'anomalie</h3>
+                        <input type="date" matInput class="txt-input"
+                            #input required>
+                    </div>
+                </div>
+                <div class="flex">
+
+
+                    <div class="input-box" style="margin-right: 5%;">
+                        <h3>Flux:</h3>
+                        <select [(ngModel)]="flux" name="flux" required>
+
+                            <option *ngFor="let flux of dataSourceFlux"
+                                value="{{flux.nom}}">{{flux.nom}}</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <h3>Activité:</h3>
+
+                        <select  [(ngModel)]="activite" name="activite" required>
+                            <ng-container *ngFor="let act of dataSourceActivites">
+                                <option *ngIf=' flux ==
+                                act.fluxTypeId.nom '  
+                                    value="{{act.name}}">{{act.name}}</option>
+                        
+                            </ng-container>
+                        </select>
+                            
+                    </div>
+                </div>
+                <div class="input-box">
+                    <h3>Type Anomalie:</h3>
+
+                    <select [(ngModel)]="type" name="typeAnomalie" required>
+                    
+                            <ng-container *ngFor="let anoType of
+                                dataSourceTypes">
+                                
+                                <option *ngIf=' activite ==
+                                    anoType.activite.name '
+                                    value='{{anoType.anoTypeNom}}'>
+                                    {{anoType.anoTypeNom}}
+                                </option>
+                            </ng-container>
+                       
+                    </select>
+                </div>
+                <div class="input-box">
+                    <h3>Description</h3>
+                    <input type="text" id="description" name="description"  style="height:130px">
+                
+                </div>
+                <div class="input-box">
+                    <h3>Numéro de lot</h3>
+                    <input type="text" id="nlot" name="nLot" >
+                
+                </div>
+                <div class="input-box">
+                    <div class="form-group">
+                        <h3>Joindre une image</h3>
+                        
+                        <button style="background-color: white;display:block;width:fit-content; text-decoration: none;" onclick="document.getElementById('getFile').click()">
+                            Choisir une image</button>
+
+                        <input  type="file" style="display: none;"  id="getFile"  (change)="onImageChange($event)">
+                        
+                      </div>
+                    
+                    
+                </div>
+
+
+                
+            </form>
+
+
+        </div>
+
+        <!-- Main Footer -->
+        <app-footer></app-footer>
+    </div>
+
+
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

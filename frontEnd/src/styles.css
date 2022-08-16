@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files 
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+ 
+
+
+html, body { height: 100%; overflow: scroll;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+ }
+.bg-lb{background-color: #4487CC;}
+.vertical-center {
+   position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+.flex{
+    display: flex;
+}
+.separateur{
+  height: 2px;
+  background-color:#4487CC ;
+}
+.content{
+font-family: Georgia, 'Times New Roman', Times, serif;
+}
